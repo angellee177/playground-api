@@ -37,7 +37,7 @@ const getProducts = (req, res) => {
 
     try {
         const newProduct = {
-            id: Products.length += 1,
+            id: Products.length++,
             name,
             price,
             category,

@@ -4,15 +4,19 @@ const express = require('express')
     , cors = require('cors') // allow or restrict requested resources on a web server.
     , router = require('./routes/index') // to be able to set routes using express.
 
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // allowing client side access or make request in our API.
+app.use(express.json()); // To allowing request body on JSON type.
+
+// To allowing request body on x-www-urlencoded type, 
+// if no, then cannot receive request body from x-www-urlencoded type.
+app.use( express.urlencoded({ extended: true }) ); 
+
 app.use('/api/v1', router);
 
 dotenv.config();
 const port = process.env.PORT || 7010
     , env  = process.env.NODE_ENV || 'development';
     
-app.use( express.urlencoded({ extended: true }) );
 app.get("/", (req, res) => {
     res.status(200).json({
         success: true,

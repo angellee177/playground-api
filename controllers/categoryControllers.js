@@ -19,7 +19,23 @@ const getCategories = (req, res) => {
  * 
  */
 const create = (req, res) => {
-    const { name = null } 
+    
+    console.log("🚀 ~ file: categoryControllers.js ~ line 32 ~ create ~ newCategory", req.body);
+    // const { name = "" } = req.body;
+    
+    try {
+        const newCategory = {
+            id: Categories.length++,
+            name,
+        }
+
+        Categories.push(newCategory);
+
+        
+        return res.status(200).json({ success: { status: true, message: 'success'}, data: req.body });
+    } catch(e) {
+        return res.status(417).json({ success: { status: false, message: e.message }, data: null });
+    }
 };
 
 /**
